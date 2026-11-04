@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>se!nyum | Juice Up Your Day!</title>
+
+<style>
+:root {
+  --blue: #2468e8;
+  --light-blue: #eaf2ff;
+  --yellow: #ffdc4a;
+  --ink: #17335f;
+  --cream: #fffdf5;
+  --muted: #6d7d98;
+  --line: #dce6f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 7%;
+  background: white;
+  border-bottom: 1px solid var(--line);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--blue);
+}
+
+.logo span {
+  color: #f0b900;
+}
+
+.tagline {
+  color: var(--muted);
+  font-size: .8rem;
+  font-weight: bold;
+}
+
+main {
+  max-width: 1050px;
+  margin: 35px auto;
+  padding: 0 20px 50px;
+}
+
+.hero {
+  background: var(--blue);
+  color: white;
+  border-radius: 30px;
+  padding: 50px;
+  min-height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  line-height: 1;
+  margin: 15px 0;
+  letter-spacing: -3px;
+}
+
+.hero h1 span {
+  color: var(--yellow);
+}
+
+.hero p {
+  max-width: 450px;
+  line-height: 1.6;
+  color: #e8f0ff;
+}
+
+.hero::after {
+  content: "🍍";
+  position: absolute;
+  right: 5%;
+  bottom: -20px;
+  font-size: 160px;
+  transform: rotate(-15deg);
+}
+
+.eyebrow {
+  color: var(--yellow);
+  font-size: .8rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.btn {
+  padding: 13px 22px;
+  border-radius: 999px;
+  font-weight: bold;
+}
+
+.primary {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+.blue-btn {
+  background: var(--blue);
+  color: white;
+}
+
+.secondary {
+  background: white;
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.panel {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  padding: 30px;
+  margin-top: 22px;
+  box-shadow: 0 10px 30px #17335f08;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.muted {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 13px;
+  margin-top: 20px;
+}
+
+.choice {
+  background: white;
+  color: var(--ink);
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: left;
+}
+
+.choice:hover,
+.choice.selected {
+  border-color: var(--blue);
+  background: var(--light-blue);
+}
+
+.choice .emoji {
+  display: block;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.choice strong {
+  display: block;
+}
+
+.choice small {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.steps {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 25px;
+}
+
+.step-dot {
+  height: 6px;
+  flex: 1;
+  border-radius: 10px;
+  background: #e5ebf5;
+}
+
+.step-dot.active {
+  background: var(--blue);
+}
+
+.fruit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 11px;
+  margin: 20px 0;
+}
+
+.fruit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  border: 2px solid var(--line);
+  border-radius: 17px;
+  background: white;
+  color: var(--ink);
+  text-align: left;
+}
+
+.fruit.selected {
+  border-color: var(--blue);
+  background: var(--light-blue);
+}
+
+.fruit.selected::after {
+  content: "✓";
+  margin-left: auto;
+  color: var(--blue);
+  font-weight: bold;
+}
+
+.fruit:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.fruit-emoji {
+  font-size: 1.5rem;
+}
+
+.pill {
+  display: inline-block;
+  background: var(--light-blue);
+  color: var(--blue);
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: bold;
+  margin: 5px 5px 5px 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.right {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.result-box {
+  background: linear-gradient(135deg, #eaf2ff, #fff9d9);
+  border-radius: 24px;
+  padding: 25px;
+  margin-top: 20px;
+}
+
+.result-fruit {
+  font-size: 2.5rem;
+  margin: 10px 0;
+}
+
+.note {
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 25px;
+  font-size: .85rem;
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 15px 5%;
+  }
+
+  .hero {
+    padding: 30px;
+  }
+
+  .hero::after {
+    opacity: .3;
+    right: -15px;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+  .actions button {
+    flex: 1;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">se!<span>nyum</span> 🍹</div>
+  <div class="tagline">JUICE UP YOUR DAY!</div>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <div class="eyebrow">FRESH CHOICES, HAPPY SIPS</div>
+
+  <h1>
+    Find your<br>
+    <span>happy juice.</span>
+  </h1>
+
+  <p>
+    Racik jus dengan buah pilihanmu.
+    Mulai dari rasa yang kamu suka atau
+    jelajahi menu berdasarkan kondisi yang ingin diperhatikan.
+  </p>
+
+  <button class="btn primary" onclick="start()">
+    Mulai racik →
+  </button>
+</section>
+
+<section class="panel hidden" id="app">
+
+  <div class="steps" id="progress"></div>
+
+  <div id="screen"></div>
+
+  <div class="actions" id="navigation">
+    <button class="btn secondary" id="backBtn" onclick="back()">
+      ← Kembali
+    </button>
+
+    <div class="right">
+      <button class="btn secondary" onclick="resetApp()">
+        Ulangi
+      </button>
+
+      <button
+        class="btn blue-btn hidden"
+        id="continueBtn"
+        onclick="continueStep()">
+        Lanjut →
+      </button>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  se!nyum · Juice Up Your Day! 💛💙
+</footer>
+
+<script>
+
+// =========================
+// DATA BUAH
+// =========================
+
+const fruitEmoji = {
+  "Apel": "🍎",
+  "Alpukat": "🥑",
+  "Buah naga": "🐉",
+  "Pisang": "🍌",
+  "Pepaya": "🧡",
+  "Pir": "🍐",
+  "Jambu": "🍈",
+  "Jeruk": "🍊",
+  "Stroberi": "🍓",
+  "Kiwi": "🥝",
+  "Melon": "🍈",
+  "Mangga": "🥭",
+  "Nanas": "🍍"
+};
+
+
+// =========================
+// MENU KONDISI KESEHATAN
+// Mengikuti PDF se!nyum
+// =========================
+
+const healthMenus = {
+
+  "Darah tinggi": {
+    "Manis": [
+      "Pisang", "Pepaya", "Buah naga", "Apel", "Alpukat"
+    ],
+
+    "Asam segar": [
+      "Jambu", "Jeruk", "Stroberi", "Kiwi", "Apel"
+    ]
+  },
+
+  "Kolesterol": {
+    "Manis": [
+      "Apel", "Pir", "Alpukat", "Buah naga", "Pisang"
+    ],
+
+    "Asam segar": [
+      "Stroberi", "Kiwi", "Jambu", "Jeruk", "Apel"
+    ]
+  },
+
+  "Diabetes": {
+    "Netral / kurang manis": [
+      "Apel", "Jambu", "Pir", "Stroberi", "Buah naga"
+    ],
+
+    "Asam segar": [
+      "Jambu", "Stroberi", "Kiwi", "Jeruk", "Apel"
+    ]
+  },
+
+  "Asam lambung": {
+    "Manis": [
+      "Pisang", "Melon", "Pepaya", "Apel", "Buah naga"
+    ],
+
+    "Segar non-sitrus": [
+      "Melon", "Pir", "Apel", "Pepaya", "Buah naga"
+    ]
+  },
+
+  "Daya tahan tubuh": {
+    "Manis": [
+      "Pepaya", "Stroberi", "Melon", "Mangga", "Jambu"
+    ],
+
+    "Asam segar": [
+      "Kiwi", "Jeruk", "Stroberi", "Jambu", "Nanas"
+    ]
+  },
+
+  "Pencernaan": {
+    "Manis": [
+      "Pepaya", "Pisang", "Melon", "Apel", "Buah naga"
+    ],
+
+    "Asam segar": [
+      "Jambu", "Stroberi", "Kiwi", "Jeruk", "Nanas"
+    ]
+  },
+
+  "Sembelit": {
+    "Manis": [
+      "Pir", "Apel dengan kulit", "Pepaya",
+      "Stroberi", "Buah naga"
+    ],
+
+    "Asam segar": [
+      "Jeruk", "Stroberi", "Kiwi",
+      "Apel dengan kulit", "Jambu"
+    ]
+  }
+
+};
+
+
+// =========================
+// MENU PREFERENSI RASA
+// TANPA KONDISI KESEHATAN
+// TOTAL 13 BUAH
+// =========================
+
+const tasteMenus = {
+
+  "Manis": [
+    "Pisang",
+    "Pepaya",
+    "Alpukat",
+    "Melon",
+    "Mangga"
+  ],
+
+  "Asam": [
+    "Jeruk",
+    "Kiwi",
+    "Nanas",
+    "Stroberi"
+  ],
+
+  "Segar": [
+    "Apel",
+    "Buah naga",
+    "Pir",
+    "Jambu"
+  ]
+
+};
+
+
+// =========================
+// ADD-ONS
+// =========================
+
+const addons = [
+  "Chia seeds",
+  "Oat",
+  "Yogurt",
+  "Madu",
+  "Tanpa add-ons"
+];
+
+
+// =========================
+// STATE WEBSITE
+// =========================
+
+let state = {
+  path: null,
+  condition: null,
+  taste: null,
+  fruits: [],
+  addons: [],
+  step: 0
+};
+
+const screens = [
+  "path",
+  "condition",
+  "taste",
+  "fruit",
+  "addons",
+  "result"
+];
+
+
+// =========================
+// MULAI WEBSITE
+// =========================
+
+function start() {
+
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+
+  resetApp();
+}
+
+
+// =========================
+// RESET
+// =========================
+
+function resetApp() {
+
+  state = {
+    path: null,
+    condition: null,
+    taste: null,
+    fruits: [],
+    addons: [],
+    step: 0
+  };
+
+  document.getElementById("navigation").classList.remove("hidden");
+
+  render();
+}
+
+
+// =========================
+// RENDER HALAMAN
+// =========================
+
+function render() {
+
+  const step = screens[state.step];
+
+  const screen = document.getElementById("screen");
+
+  document.getElementById("progress").innerHTML =
+    screens.map((item, index) => `
+      <div class="step-dot ${
+        index <= state.step ? "active" : ""
+      }"></div>
+    `).join("");
+
+  document.getElementById("backBtn")
+    .classList.toggle("hidden", state.step === 0);
+
+  document.getElementById("continueBtn")
+    .classList.toggle(
+      "hidden",
+      !(step === "fruit" || step === "addons")
+    );
+
+  let html = "";
+
+  // PILIH JALUR
+
+  if (step === "path") {
+
+    html = `
+      <h2>Kamu mau mulai dari mana? ✨</h2>
+
+      <p class="muted">
+        Pilih cara menemukan racikan yang pas.
+      </p>
+
+      <div class="choices">
+
+        <button class="choice" onclick="choosePath('health')">
+          <span class="emoji">🌿</span>
+          <strong>Berdasarkan kondisi</strong>
+          <small>
+            Pilih kondisi, preferensi rasa, dan buah.
+          </small>
+        </button>
+
+        <button class="choice" onclick="choosePath('taste')">
+          <span class="emoji">🍓</span>
+          <strong>Based on Preferensi Rasa</strong>
+          <small>
+            Tanpa kondisi tertentu. Jelajahi 13 buah.
+          </small>
+        </button>
+
+      </div>
+    `;
+  }
+
+
+  // PILIH KONDISI
+
+  if (step === "condition") {
+
+    const conditions = Object.keys(healthMenus);
+
+    html = `
+      <h2>Pilih kondisi yang ingin diperhatikan</h2>
+
+      <p class="muted">
+        Pilih kondisi untuk melihat preferensi rasa.
+      </p>
+
+      <div class="choices">
+
+        ${conditions.map((condition, index) => `
+          <button
+            class="choice"
+            onclick="chooseCondition('${condition}')">
+
+            <span class="emoji">
+              ${["💙","🫀","🌱","🍃","🛡️","🌼","🌾"][index]}
+            </span>
+
+            <strong>${condition}</strong>
+
+            <small>Tap untuk memilih</small>
+
+          </button>
+        `).join("")}
+
+      </div>
+    `;
+  }
+
+
+  // PILIH RASA
+
+  if (step === "taste") {
+
+    const tastes =
+      state.path === "health"
+        ? Object.keys(healthMenus[state.condition])
+        : Object.keys(tasteMenus);
+
+    html = `
+      <h2>Pilih preferensi rasa</h2>
+
+      <p class="muted">
+        ${
+          state.path === "health"
+            ? "Menu untuk kondisi " + state.condition + "."
+            : "Pilih rasa yang paling kamu suka."
+        }
+      </p>
+
+      <div class="choices">
+
+        ${tastes.map(taste => `
+          <button
+            class="choice"
+            onclick="chooseTaste('${taste}')">
+
+            <span class="emoji">
+              ${
+                taste.toLowerCase().includes("asam") ||
+                taste === "Asam"
+                  ? "🍋"
+                  : taste.toLowerCase().includes("segar")
+                    ? "🫧"
+                    : taste.toLowerCase().includes("netral")
+                      ? "🌿"
+                      : "🍯"
+              }
+            </span>
+
+            <strong>${taste}</strong>
+
+            <small>
+              Tap untuk melihat pilihan buah
+            </small>
+
+          </button>
+        `).join("")}
+
+      </div>
+    `;
+  }
+
+
+  // PILIH BUAH
+
+  if (step === "fruit") {
+
+    const fruits =
+      state.path === "health"
+        ? healthMenus[state.condition][state.taste]
+        : tasteMenus[state.taste];
+
+    html = `
+      <h2>Pilih buah racikanmu 🍉</h2>
+
+      <p class="muted">
+        Pilih maksimal 3 buah untuk racikanmu.
+      </p>
+
+      <span class="pill">${state.taste}</span>
+
+      ${
+        state.condition
+          ? `<span class="pill">${state.condition}</span>`
+          : ""
+      }
+
+      <span class="pill">
+        ${state.fruits.length}/3 dipilih
+      </span>
+
+      <div class="fruit-grid">
+
+        ${fruits.map(fruit => {
+
+          const displayName =
+            fruit === "Apel dengan kulit"
+              ? "Apel (dengan kulit)"
+              : fruit;
+
+          const emoji =
+            fruitEmoji[fruit.replace(" dengan kulit", "")] || "🍏";
+
+          return `
+            <button
+              class="fruit ${
+                state.fruits.includes(fruit) ? "selected" : ""
+              }"
+
+              ${
+                state.fruits.length >= 3 &&
+                !state.fruits.includes(fruit)
+                  ? "disabled"
+                  : ""
+              }
+
+              onclick="toggleFruit('${fruit}')">
+
+              <span class="fruit-emoji">${emoji}</span>
+
+              <strong>${displayName}</strong>
+
+            </button>
+          `;
+
+        }).join("")}
+
+      </div>
+    `;
+  }
+
+
+  // ADD-ONS
+
+  if (step === "addons") {
+
+    html = `
+      <h2>Tambahkan sentuhan akhir ✨</h2>
+
+      <p class="muted">
+        Pilih add-ons yang kamu suka.
+      </p>
+
+      <div class="choices">
+
+        ${addons.map((addon, index) => `
+          <button
+            class="choice ${
+              state.addons.includes(addon) ? "selected" : ""
+            }"
+
+            onclick="toggleAddon('${addon}')">
+
+            <span class="emoji">
+              ${["🌱","🥣","🥛","🍯","✨"][index]}
+            </span>
+
+            <strong>${addon}</strong>
+
+            <small>
+              ${
+                state.addons.includes(addon)
+                  ? "Dipilih"
+                  : "Tambahkan ke racikan"
+              }
+            </small>
+
+          </button>
+        `).join("")}
+
+      </div>
+    `;
+  }
+
+
+  // HASIL RACIKAN
+
+  if (step === "result") {
+
+    const selectedFruits = state.fruits.map(fruit =>
+      fruit === "Apel dengan kulit"
+        ? "Apel (dengan kulit)"
+        : fruit
+    );
+
+    html = `
+      <h2>Racikan se!nyum kamu siap! 💛</h2>
+
+      <p class="muted">
+        Ini kombinasi pilihanmu.
+      </p>
+
+      <div class="result-box">
+
+        <span class="pill">
+          ${
+            state.path === "health"
+              ? "Berdasarkan kondisi"
+              : "Preferensi rasa"
+          }
+        </span>
+
+        ${
+          state.condition
+            ? `<span class="pill">${state.condition}</span>`
+            : ""
+        }
+
+        <span class="pill">${state.taste}</span>
+
+        <div class="result-fruit">
+          ${state.fruits.map(fruit =>
+            fruitEmoji[fruit.replace(" dengan kulit", "")] || "🍏"
+          ).join(" ")}
+        </div>
+
+        <h3>${selectedFruits.join(" + ")}</h3>
+
+        <p>
+          Add-ons:
+          <strong>
+            ${
+              state.addons.length
+                ? state.addons.join(", ")
+                : "Tidak ada"
+            }
+          </strong>
+        </p>
+
+        <p class="muted">
+          Juice Up Your Day!
+        </p>
+
+      </div>
+
+      <p class="note">
+        Catatan: kategori kondisi digunakan sebagai inspirasi menu,
+        bukan klaim bahwa jus menyembuhkan atau mengendalikan penyakit.
+        Untuk diabetes, tetap perhatikan porsi buah dan hindari
+        tambahan gula. Pada asam lambung, sesuaikan pilihan dengan
+        toleransi pribadi. Madu juga mengandung gula.
+      </p>
+
+      <button class="btn blue-btn" onclick="resetApp()">
+        Racik lagi ↻
+      </button>
+    `;
+
+    document.getElementById("navigation").classList.add("hidden");
+  }
+
+  else {
+    document.getElementById("navigation").classList.remove("hidden");
+  }
+
+  screen.innerHTML = html;
+}
+
+
+// =========================
+// PILIH JALUR
+// =========================
+
+function choosePath(path) {
+
+  state.path = path;
+
+  state.step =
+    path === "health"
+      ? 1
+      : 2;
+
+  render();
+}
+
+
+// =========================
+// PILIH KONDISI
+// =========================
+
+function chooseCondition(condition) {
+
+  state.condition = condition;
+  state.step = 2;
+
+  render();
+}
+
+
+// =========================
+// PILIH RASA
+// =========================
+
+function chooseTaste(taste) {
+
+  state.taste = taste;
+  state.fruits = [];
+  state.step = 3;
+
+  render();
+}
+
+
+// =========================
+// PILIH / BATALKAN BUAH
+// MAKSIMAL 3 BUAH
+// =========================
+
+function toggleFruit(fruit) {
+
+  if (state.fruits.includes(fruit)) {
+
+    state.fruits =
+      state.fruits.filter(item => item !== fruit);
+
+  } else if (state.fruits.length < 3) {
+
+    state.fruits.push(fruit);
+
+  }
+
+  render();
+}
+
+
+// =========================
+// PILIH ADD-ONS
+// =========================
+
+function toggleAddon(addon) {
+
+  if (addon === "Tanpa add-ons") {
+
+    state.addons =
+      state.addons.includes(addon)
+        ? []
+        : [addon];
+
+  } else {
+
+    state.addons =
+      state.addons.filter(item =>
+        item !== "Tanpa add-ons"
+      );
+
+    state.addons =
+      state.addons.includes(addon)
+        ? state.addons.filter(item => item !== addon)
+        : [...state.addons, addon];
+
+  }
+
+  render();
+}
+
+
+// =========================
+// LANJUT KE TAHAP BERIKUTNYA
+// =========================
+
+function continueStep() {
+
+  if (state.step === 3) {
+
+    if (state.fruits.length === 0) {
+
+      alert("Pilih minimal 1 buah dulu ya 🍎");
+
+      return;
+    }
+
+    state.step = 4;
+
+  } else if (state.step === 4) {
+
+    state.step = 5;
+
+  }
+
+  render();
+}
+
+
+// =========================
+// TOMBOL KEMBALI
+// =========================
+
+function back() {
+
+  if (state.step === 5) {
+
+    state.step = 4;
+
+  } else if (state.step === 4) {
+
+    state.step = 3;
+
+  } else if (state.step === 3) {
+
+    state.step = 2;
+
+  } else if (state.step === 2) {
+
+    state.step =
+      state.path === "health"
+        ? 1
+        : 0;
+
+  } else if (state.step === 1) {
+
+    state.step = 0;
+
+  }
+
+  render();
+}
+
+</script>
+
+</body>
+</html>
